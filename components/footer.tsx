@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Heart, Mail } from "lucide-react"
+import Image from "next/image"
+import { Mail } from "lucide-react"
 
 const footerLinks = [
   { label: "ホーム", href: "#" },
@@ -22,11 +23,8 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-12">
           {/* Logo & Description */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
-                <Heart className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-lg font-bold" style={{ color: "#4a4a4a" }}>みんなの介護AI</span>
+            <Link href="/" className="flex items-center mb-4">
+              <Image src="/logo.png" alt="みんなの介護AI" height={32} width={144} />
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: "#7a7a7a" }}>
               介護現場のAI活用をやさしく解説。
