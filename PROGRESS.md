@@ -57,6 +57,33 @@
 
 ---
 
+## 2026-05-26
+
+### 完了タスク
+- GitHub リポジトリ作成＆プッシュ（`gh repo create minna-no-kaigo-ai --public`）
+- Vercel 本番デプロイ完了（https://minna-no-kaigo-ai.vercel.app）
+- hero-bg.png・logo.png を web_data から public/ へコピー
+  - `components/header.tsx`: ロゴを `<Image src="/logo.png">` に変更（Heartアイコン削除）
+  - `components/hero.tsx`: 背景画像（`object-position: right center`）＋左グラデーション構成に全面変更
+  - `components/footer.tsx`: ロゴを `<Image src="/logo.png">` に変更
+- 透過背景版 logo.png に差し替え（`ChatGPT-Image-2026年5月26日-07_53_31.png`）
+- Playwright でヘッダー・フッターのロゴ表示を目視確認済み
+- CLAUDE.md 更新（本番URL・フレームワークバージョン・デプロイ方法を追記）
+
+### 結果・数値
+- 本番URL: https://minna-no-kaigo-ai.vercel.app（稼働中）
+- GitHub: https://github.com/shinya5812/minna-no-kaigo-ai
+- ビルド: 全5ページ静的生成・エラーなし
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- OGP・favicon設定（SNSシェア時の見栄え）
+- カスタムドメインの設定（任意）
+- お問い合わせメールアドレスを本番用に変更（現在 info@example.com）
+- Vercel の GitHub 自動デプロイ連携設定（現在は `npx vercel --prod` で手動デプロイ）
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク

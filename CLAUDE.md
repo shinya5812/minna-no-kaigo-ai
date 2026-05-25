@@ -7,11 +7,14 @@
 
 | 項目 | 内容 |
 |------|------|
-| フレームワーク | Next.js 14（App Router） |
-| スタイリング | Tailwind CSS |
+| フレームワーク | Next.js 16.2.6（App Router） |
+| スタイリング | Tailwind CSS v4 + shadcn/ui |
 | 決済 | Stripe（プロンプト集の直販） |
 | 格納場所 | `C:\Users\shiny\Dropbox\shinya_wa\AI_sale_project\` |
-| 本番URL | 未定 |
+| 本番URL | https://minna-no-kaigo-ai.vercel.app |
+| GitHub | https://github.com/shinya5812/minna-no-kaigo-ai |
+| パッケージマネージャー | pnpm |
+| デプロイ | `npx vercel --prod --yes`（手動）|
 
 ---
 

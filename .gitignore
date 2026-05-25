@@ -23,3 +23,11 @@ Thumbs.db
 web_data/
 dev.log
 *.log
+
+.vercel
+
+# Playwright確認用
+.playwright-mcp/
+header-check.png
+logo-header.png
+logo-footer.png
