@@ -54,3 +54,32 @@
 - `/kaigo` ページを新しいデザイン（shadcn/ui）に合わせてリファクタリング
 - Stripe決済の組み込み
 - 本番デプロイ（Vercel）
+
+---
+
+## 2026-05-25（セッション終了）
+
+### 完了タスク
+- ヒーローセクション画像を差し替え（hero-image.png）
+  - `<img>` → `next/image` の `<Image>` に変更
+  - PC: `hidden lg:block` / スマホ: `lg:hidden` でレスポンシブ対応
+  - `aspect-[4/3]` + `fill` + `object-cover` でレイアウト崩れなし
+- フッター背景色を変更（ダークブラウン → `#fdf2f8` 薄ピンク）
+- プロンプト一覧を7種類に統一（prompts.tsx / pricing.tsx）
+  - 食事・排泄・入浴・トラブル転倒・ヒヤリハット・申し送り・服薬
+  - 「毎日使える／随時使える」バッジ付き
+- FAQ を5問に更新（faq.tsx）
+  - カスタマイズ・受け取り方の問い追加
+- git init → 初回コミット（99ファイル）完了
+- CLAUDE.md に `/wrapup` セッション終了コマンドを追記
+
+### 現在の状態
+- ローカル開発サーバー: `pnpm run dev`（localhost:3000）で動作確認済み
+- Gitリポジトリ: 初期化・コミット済み（GitHub未プッシュ）
+- Vercel: 未デプロイ
+
+### 次回の再開手順
+1. ターミナルで `! gh auth login` を実行してGitHub認証
+2. `gh repo create minna-no-kaigo-ai --public --push --source=.` でリポジトリ作成＆プッシュ
+3. `npx vercel --prod` でVercelにデプロイ
+4. デプロイ完了後、Vercelの公開URLを確認して本番稼働
