@@ -20,7 +20,7 @@ export function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/10" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-4">
           <div className="max-w-xl">
             <div className="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
               <Sparkles className="mr-2 h-4 w-4" />
