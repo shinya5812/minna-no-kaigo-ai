@@ -84,6 +84,38 @@
 
 ---
 
+## 2026-05-26（追記）
+
+### 完了タスク
+- ヒーローキャッチコピー変更：「書類仕事を減らして、」→「AIで業務を軽減して、」
+- チェックマークテキスト削除（「✓ ITが苦手でも大丈夫　✓ やさしく学べます」）
+- `prompt-explain.png` 追加（`web_data/` からコピー）・ヒーロー直下に配置（後にrevert）
+- 「こんなことありませんか？」セクション新規追加（`components/pain-points.tsx`）
+  - 薄ピンク背景・6項目❌リスト・末尾に「それ、AIで解決できます。」
+  - `app/page.tsx` に PainPoints コンポーネントを追加（Hero直後・Benefits前）
+- `components/features.tsx` カードサイズ縮小（py-20→py-12、アイコン h-8→h-5）
+- hero.tsx の `prompt-explain.png` セクション：横幅・余白をヒーローと統一する試みを複数回実施
+  - 隙間の根本原因：`min-h-[520px]` によるセクション強制拡張と判明 → 削除で解消
+  - prompt-explain.png を最終的に削除し、ヒーローを背景画像版のシンプル構成に戻した
+- `hero-bg.png` のサイズ確認：1983 × 793 px（横長・1.2MB）
+
+### 現在の状態
+- `components/hero.tsx`：背景画像版（hero-bg.png + グラデーション）のシンプル構成に復元
+- `components/pain-points.tsx`：新規追加済み・稼働中
+- `components/features.tsx`：カードサイズ縮小版
+- `public/prompt-explain.png`：ファイルは存在するが hero.tsx からは参照されていない
+- ビルド：全5ページ静的生成・エラーなし
+- git push：最新コミット `0187710` まで反映済み
+
+### 次のアクション
+- prompt-explain.png をどこに・どう使うか方針決定（ヒーロー直下 or 別セクション）
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- OGP・favicon設定（SNSシェア時の見栄え）
+- お問い合わせメールアドレスを本番用に変更（現在 info@example.com）
+- Vercel の GitHub 自動デプロイ連携設定（現在は手動デプロイ）
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク
