@@ -4,6 +4,7 @@ import { BookOpen, Sparkles, ArrowRight } from "lucide-react"
 
 export function Hero() {
   return (
+    <>
     <section className="relative overflow-hidden">
       {/* 背景画像 */}
       <div className="absolute inset-0">
@@ -49,5 +50,16 @@ export function Hero() {
         </div>
       </div>
     </section>
+    <div style={{lineHeight:0, fontSize:0, display:'block'}}>
+      <Image
+        src="/prompt-explain.png"
+        alt="プロンプトとは？AIへのお願い文のことです"
+        width={1456}
+        height={816}
+        className="w-full h-auto"
+        style={{display:'block'}}
+      />
+    </div>
+    </>
   )
 }
