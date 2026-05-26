@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
+import { PainPoints } from "@/components/pain-points"
 import { Benefits } from "@/components/benefits"
 import { Features } from "@/components/features"
 import { Prompts } from "@/components/prompts"
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <PainPoints />
         <Benefits />
         <Features />
         <Prompts />

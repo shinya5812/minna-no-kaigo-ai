@@ -27,31 +27,31 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-20 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+    <section id="features" className="py-12 bg-background">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
             AIで<span className="text-primary">できること</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base max-w-2xl mx-auto">
             難しい操作は一切不要。介護現場で本当に役立つAI活用法をお伝えします。
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-5">
           {features.map((feature, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className="border-2 hover:border-primary/30 transition-colors bg-white"
             >
-              <CardHeader className="text-center pb-2">
-                <div className={`${feature.bgColor} p-4 rounded-full w-fit mx-auto mb-4`}>
-                  <feature.icon className={`h-8 w-8 ${feature.color}`} />
+              <CardHeader className="text-center pb-2 pt-5 px-5">
+                <div className={`${feature.bgColor} p-3 rounded-full w-fit mx-auto mb-3`}>
+                  <feature.icon className={`h-5 w-5 ${feature.color}`} />
                 </div>
-                <CardTitle className="text-xl text-foreground">{feature.title}</CardTitle>
+                <CardTitle className="text-base text-foreground">{feature.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base text-muted-foreground text-center leading-relaxed">
+              <CardContent className="px-5 pb-5">
+                <CardDescription className="text-sm text-muted-foreground text-center leading-relaxed">
                   {feature.description}
                 </CardDescription>
               </CardContent>
