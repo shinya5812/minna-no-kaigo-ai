@@ -5,7 +5,7 @@ import { BookOpen, Sparkles, ArrowRight } from "lucide-react"
 export function Hero() {
   return (
     <>
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white to-pink-50">
       {/* 背景画像 */}
       <div className="absolute inset-0">
         <Image
@@ -18,6 +18,8 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/10" />
       </div>
+      {/* 下端をpink-50へ溶け込ませるオーバーレイ */}
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-pink-50" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-16 md:pb-24">
         <div className="max-w-xl">
           <div className="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
