@@ -116,6 +116,31 @@
 
 ---
 
+## 2026-05-26（追記2）
+
+### 完了タスク
+- `prompt-explain.png` を `web_data/` → `public/` へコピーし hero.tsx 直下に配置（v2）
+  - `</section>` 直後に `<Image>` ブロックを追加（React Fragment でラップ）
+  - `lineHeight:0 / fontSize:0 / display:block` で隙間ゼロ対応
+- ヒーロー下端の色をプロンプト画像背景（`#fdf2f8`）に合わせてグラデーション調整
+  - `<section>` に `bg-gradient-to-b from-white to-pink-50` 追加
+  - 下端 `h-24` の `from-transparent to-pink-50` オーバーレイを追加（画像上にも適用）
+- ビルド確認：`✓ Compiled successfully`・全5ページ静的生成エラーなし
+- git push：`befb204` まで反映済み
+
+### 現在の状態
+- `components/hero.tsx`：ヒーロー（背景画像）→ 下端ピンクフェード → prompt-explain.png の順
+- ヒーロー下端とプロンプト画像の背景色（`#fdf2f8`）を揃えて隙間を目立たなくした構成
+- 本番URL: https://minna-no-kaigo-ai.vercel.app（GitHub push → Vercel 自動デプロイ中）
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- OGP・favicon設定（SNSシェア時の見栄え）
+- お問い合わせメールアドレスを本番用に変更（現在 info@example.com）
+- Vercel の GitHub 自動デプロイ連携確認
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク
