@@ -64,14 +64,14 @@ export function Hero() {
       </section>
 
       {/* プロンプト説明画像 */}
-      <div className="py-12 bg-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="pt-0 pb-12 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Image
             src="/prompt-explain.png"
             alt="AIプロンプトの使い方説明"
-            width={1200}
-            height={800}
-            className="rounded-2xl w-full h-auto mx-auto"
+            width={1400}
+            height={933}
+            className="rounded-2xl shadow-sm w-full h-auto"
           />
         </div>
       </div>
