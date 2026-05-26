@@ -5,7 +5,7 @@ import { BookOpen, Sparkles, ArrowRight } from "lucide-react"
 export function Hero() {
   return (
     <>
-      <section className="relative overflow-hidden min-h-[520px] md:min-h-[620px]">
+      <section className="relative overflow-hidden min-h-[520px] md:min-h-[620px] pb-0">
         {/* 背景画像 */}
         <div className="absolute inset-0">
           <Image
@@ -20,7 +20,7 @@ export function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/10" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-4">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-0">
           <div className="max-w-xl">
             <div className="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
               <Sparkles className="mr-2 h-4 w-4" />
@@ -64,7 +64,7 @@ export function Hero() {
       </section>
 
       {/* プロンプト説明画像 */}
-      <div className="pt-0 pb-12 bg-white">
+      <div className="mt-0 pt-0 pb-12 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Image
             src="/prompt-explain.png"
