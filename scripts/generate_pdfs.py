@@ -60,38 +60,38 @@ class PromptPDF(FPDF):
     # ────────────────────────────────
     def add_cover(self, main_title, sub_title):
         self.add_page()
-        # 背景グラデーション風（上ピンク帯）
+        # ピンク背景：ページ上2/3（タイトルが確実に乗る高さ）
         self.set_fill_color(*PINK)
-        self.rect(0, 0, 210, 80, style="F")
-        # 下部薄ピンク帯
+        self.rect(0, 0, 210, 165, style="F")
+        # 薄ピンク背景：下1/3
         self.set_fill_color(*LIGHT_BG)
-        self.rect(0, 80, 210, 217, style="F")
+        self.rect(0, 165, 210, 132, style="F")
 
-        # ロゴ
+        # ロゴ（ピンク背景内・上部中央）
         if os.path.exists(LOGO):
-            self.image(LOGO, x=70, y=18, w=70)
+            self.image(LOGO, x=75, y=22, w=60)
 
-        # メインタイトル
-        self.set_font("Gothic", "B", 22)
+        # メインタイトル（白・32pt・ピンク背景内・中央やや上）
+        self.set_font("Gothic", "B", 32)
         self.set_text_color(*WHITE)
-        self.set_xy(10, 90)
-        self.multi_cell(190, 12, main_title, align="C")
+        self.set_xy(10, 105)
+        self.multi_cell(190, 15, main_title, align="C")
 
-        # サブタイトル（サイト名）
-        self.set_font("Gothic", "B", 14)
-        self.set_text_color(*PINK_DARK)
+        # サブタイトル（白・ピンク背景内）
+        self.set_font("Gothic", "B", 15)
+        self.set_text_color(*WHITE)
         self.set_xy(10, self.get_y() + 6)
         self.cell(190, 10, sub_title, align="C", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
-        # 区切り線
+        # 区切り線（薄ピンク背景内）
         self.set_draw_color(*PINK)
         self.set_line_width(1)
-        self.line(50, self.get_y() + 5, 160, self.get_y() + 5)
+        self.line(50, 183, 160, 183)
 
         # URL
         self.set_font("Gothic", "", 10)
         self.set_text_color(120, 120, 120)
-        self.set_xy(10, self.get_y() + 12)
+        self.set_xy(10, 190)
         self.cell(190, 8, "https://minna-no-kaigo-ai.vercel.app", align="C")
 
     # ────────────────────────────────
