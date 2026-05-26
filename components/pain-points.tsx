@@ -31,7 +31,7 @@ export function PainPoints() {
         </ul>
 
         <p className="mt-10 text-center text-xl sm:text-2xl font-bold" style={{ color: "#c0507a" }}>
-          それ、AIで解決できます。
+          すべて、AIで解決できます。
         </p>
       </div>
     </section>
