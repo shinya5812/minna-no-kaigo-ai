@@ -131,16 +131,29 @@ class PromptPDF(FPDF):
     # ────────────────────────────────
     def add_prompt_page(self, page_title, content_blocks):
         """
-        content_blocks: list of (block_title, block_text)
-        block_title が None の場合はテキストのみ表示
+        content_blocks: list of (block_title, block_text) or (block_title, block_text, style)
+        style: "prompt"（デフォルト）, "example_in", "example_out", "note"
         """
         self.add_page()
         self.section_heading(page_title)
 
-        for block_title, block_text in content_blocks:
-            if block_title:
-                self.block_heading(block_title)
-            self.prompt_text(block_text)
+        for block in content_blocks:
+            if len(block) == 3:
+                block_title, block_text, style = block
+            else:
+                block_title, block_text = block
+                style = "prompt"
+
+            if style == "example_in":
+                self.example_box("【入力例】", block_text)
+            elif style == "example_out":
+                self.example_box("【出力例】", block_text)
+            elif style == "note":
+                self.body_text(block_text)
+            else:
+                if block_title:
+                    self.block_heading(block_title)
+                self.prompt_text(block_text)
 
     # ────────────────────────────────
     # 有料版案内ページ
@@ -233,6 +246,26 @@ class PromptPDF(FPDF):
         self.multi_cell(190, 5.5, text, fill=True,
                         new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         self.ln(3)
+
+    def example_box(self, label, text):
+        """入力例・出力例ボックス（薄黄緑背景）"""
+        LABEL_BG  = (187, 247, 208)   # 少し濃い黄緑（ラベル行）
+        TEXT_BG   = (240, 253, 244)   # 薄黄緑（本文行）
+        LABEL_FG  = (22,  101,  52)   # 濃い緑（ラベル文字）
+        self.set_fill_color(*LABEL_BG)
+        self.set_text_color(*LABEL_FG)
+        self.set_font("Gothic", "B", 9)
+        self.set_x(10)
+        self.cell(190, 7, f"  {label}", fill=True,
+                  new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        self.set_fill_color(*TEXT_BG)
+        self.set_font("Gothic", "", 9)
+        self.set_text_color(60, 60, 60)
+        self.set_x(10)
+        self.multi_cell(190, 5.5, text, fill=True,
+                        new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        self.ln(3)
+        self.set_text_color(*GRAY)
 
 
 # ════════════════════════════════════════════════════════
@@ -690,6 +723,147 @@ A：[回答]"""
 
 
 # ════════════════════════════════════════════════════════
+# 入力例・出力例データ
+# ════════════════════════════════════════════════════════
+
+# ── 食事場面 ──
+MEAL_EXAMPLE_IN = """\
+時刻：12:10
+摂取量：主食8割・副食全量・水分150ml
+利用者の様子：むせなし、食欲良好
+利用者の発言：今日のごはんおいしいね
+職員の対応：声かけしながら見守り
+連携・報告先：なし"""
+
+MEAL_EXAMPLE_OUT = """\
+12:10、昼食の食事介助。主食8割・副食全量・水分150mlを摂取。むせなく食欲良好。「今日のごはんおいしいね」との発言あり。声かけしながら見守り対応。特記事項なし。"""
+
+# ── 申し送り ──
+HANDOVER_EXAMPLE_IN = """\
+利用者名：田中様
+引き継ぎ時間帯：日勤→夜勤
+身体状態：発熱なし、血圧130/80
+食事・水分摂取：昼食8割、水分400ml
+排泄状況：午後2回、普通便
+特記事項：14時頃に右膝の痛みを訴えた
+継続観察が必要な事項：右膝の痛み・歩行状態
+次担当者への指示：就寝前に痛みの有無を確認すること"""
+
+HANDOVER_EXAMPLE_OUT = """\
+田中様、日勤→夜勤の申し送り。発熱なし、血圧130/80。昼食8割摂取、水分400ml。排泄は午後2回、普通便。14時頃に右膝の痛みを訴えたため経過観察中。歩行状態と右膝の痛みを継続確認のこと。就寝前に痛みの有無を確認すること。"""
+
+# ── 服薬 ──
+MEDS_EXAMPLE_IN = """\
+時刻：8:30
+服薬種別：朝
+薬の種類・数量：降圧剤1錠・血液サラサラ1錠
+服薬介助レベル：見守り
+服薬時の様子：問題なし
+拒否・トラブルの有無：なし
+未服薬の有無と対応：なし
+利用者の発言：なし
+職員の対応・連携：確認のみ"""
+
+MEDS_EXAMPLE_OUT = """\
+8:30、朝の服薬介助。降圧剤1錠・血液サラサラ1錠を見守りにて服薬確認。問題なし。拒否・未服薬なし。職員確認のみで対応完了。"""
+
+# ── 排泄 ──
+TOILET_EXAMPLE_IN = """\
+時刻：10:15
+きっかけ：ナースコール
+移動方法：歩行器
+自立できた動作：ズボンの上げ下ろし
+介助が必要だった動作：トイレへの誘導
+排泄状況：普通便・中量・茶褐色
+利用者の発言：すっきりした
+排泄後の状態：表情良好
+職員の対応・連携：なし"""
+
+TOILET_EXAMPLE_OUT = """\
+10:15、ナースコールにて排泄介助。歩行器を使用しトイレへ誘導。ズボンの上げ下ろしは自立。普通便・中量・茶褐色。「すっきりした」との発言あり。排泄後の表情良好。特記事項なし。"""
+
+# ── 入浴 ──
+BATH_EXAMPLE_IN = """\
+時刻：14:00
+入浴方法：一般浴
+入浴中の体調：良好・顔色問題なし
+皮膚状態・身体所見：右肘に発赤あり（約1cm）
+自立できた動作：洗顔・上半身の洗体
+介助が必要だった動作：下半身の洗体・浴槽への移乗
+利用者の発言：気持ちいい
+職員の対応・連携：発赤について看護師に報告
+今後の方針：右肘の経過観察"""
+
+BATH_EXAMPLE_OUT = """\
+14:00、一般浴にて入浴介助。体調良好、顔色問題なし。洗顔・上半身の洗体は自立。下半身の洗体・浴槽への移乗は介助。右肘に約1cmの発赤を確認。「気持ちいい」との発言あり。発赤について看護師に報告済み。右肘の経過観察を継続する。"""
+
+# ── トラブル・転倒 ──
+INCIDENT_EXAMPLE_IN = """\
+発見時刻：15:30
+発見者：山田職員
+発見場所：居室
+発見時の状況：ベッド横の床に座り込んでいた
+利用者の発言：立とうとしたら足がもつれた
+身体所見：右膝に軽度の発赤、痛みの訴えあり
+職員の初期対応：バイタル測定・安静を促した
+報告先・報告内容：看護師・施設長に報告
+医療的判断・処置：骨折なし・経過観察の指示
+本人の反応・同意：同意あり
+今後の方針：ヒヤリハット記録作成・センサー設置を検討"""
+
+INCIDENT_EXAMPLE_OUT = """\
+15:30、山田職員が居室においてベッド横の床に座り込んでいる状態を確認。「立とうとしたら足がもつれた」との訴え。右膝に軽度の発赤あり、痛みの訴えあり。バイタル測定・安静を促した。看護師・施設長に報告。骨折なし・経過観察の指示。本人同意あり。ヒヤリハット記録を作成し、センサー設置を検討する。"""
+
+# ── ヒヤリハット ──
+NEAR_MISS_EXAMPLE_IN = """\
+発生日時：5月27日 10:45
+発生場所：食堂
+発見者：鈴木職員
+利用者名・状態：佐藤様（要介護3・認知症あり）
+発生状況：食事中にむせ込みが続き、チアノーゼが一時的に出現
+利用者の発言・訴え：なし（会話困難な状態）
+身体所見：顔色回復・バイタル安定
+発生要因：食事形態が合っていなかった可能性
+発生時の対応：食事を中止・背部叩打・吸引実施
+再発防止策：食事形態の見直し・食事中の観察強化"""
+
+NEAR_MISS_EXAMPLE_OUT = """\
+【発生状況】
+5月27日10:45、食堂にて佐藤様（要介護3・認知症あり）の食事介助中、むせ込みが続きチアノーゼが一時的に出現したことを鈴木職員が確認。会話困難な状態。顔色は対応後に回復、バイタル安定。
+【要因分析】
+食事形態が利用者の嚥下機能に合っていなかった可能性が考えられる。
+【対応内容】
+食事を即時中止。背部叩打・吸引を実施。バイタル確認後、看護師に報告。
+【再発防止策】
+食事形態を嚥下機能に応じて見直す。食事中の観察を強化し、担当職員を固定する。"""
+
+# ── 苦情受付票 ──
+COMPLAINT_RECEIPT_EXAMPLE_IN = """\
+受付日時：5月27日 13:00
+受付者：田中主任
+申出人：家族（長女）
+申出人氏名：山田花子
+苦情の内容：母の洋服が別の利用者のものと間違えて渡されていた
+申出人の発言：何度も同じことが起きている、管理をしっかりしてほしい
+希望する解決方法：再発防止策を文書で提出してほしい
+緊急度：中
+報告先：施設長"""
+
+COMPLAINT_RECEIPT_EXAMPLE_OUT = """\
+【苦情受付票】
+受付日時：5月27日13:00　受付者：田中主任
+申出人：家族（長女）・山田花子
+【苦情内容】
+利用者の洋服が別の利用者のものと取り違えられ渡された。「何度も同じことが起きている、管理をしっかりしてほしい」との申し出。
+【希望する解決方法】
+再発防止策を文書で提出すること
+【緊急度・報告】
+緊急度：中　報告先：施設長"""
+
+NOTE_INPUT_ONLY = "※ 入力項目に沿って記入後、AIに送信してください。"
+
+
+# ════════════════════════════════════════════════════════
 # PDF生成
 # ════════════════════════════════════════════════════════
 
@@ -700,9 +874,21 @@ def build_free():
         "みんなの介護AI"
     )
     pdf.add_intro()
-    pdf.add_prompt_page("食事場面の介護記録プロンプト", [(None, MEAL_PROMPT)])
-    pdf.add_prompt_page("申し送り文の作成プロンプト",  [(None, HANDOVER_PROMPT)])
-    pdf.add_prompt_page("服薬場面の記録プロンプト",    [(None, MEDS_PROMPT)])
+    pdf.add_prompt_page("食事場面の介護記録プロンプト", [
+        (None, MEAL_PROMPT),
+        (None, MEAL_EXAMPLE_IN,  "example_in"),
+        (None, MEAL_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("申し送り文の作成プロンプト", [
+        (None, HANDOVER_PROMPT),
+        (None, HANDOVER_EXAMPLE_IN,  "example_in"),
+        (None, HANDOVER_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("服薬場面の記録プロンプト", [
+        (None, MEDS_PROMPT),
+        (None, MEDS_EXAMPLE_IN,  "example_in"),
+        (None, MEDS_EXAMPLE_OUT, "example_out"),
+    ])
     pdf.add_upsell([
         "ver1（¥2,980）　排泄・入浴・トラブル・ヒヤリハットの4場面",
         "ver2（¥1,980）　苦情対応・実地指導準備の6文書",
@@ -719,10 +905,26 @@ def build_ver1():
         "みんなの介護AI"
     )
     pdf.add_intro()
-    pdf.add_prompt_page("排泄場面の介護記録プロンプト",     [(None, TOILET_PROMPT)])
-    pdf.add_prompt_page("入浴場面の介護記録プロンプト",     [(None, BATH_PROMPT)])
-    pdf.add_prompt_page("トラブル・転倒記録プロンプト",     [(None, INCIDENT_PROMPT)])
-    pdf.add_prompt_page("ヒヤリハット報告書プロンプト",     [(None, NEAR_MISS_PROMPT)])
+    pdf.add_prompt_page("排泄場面の介護記録プロンプト", [
+        (None, TOILET_PROMPT),
+        (None, TOILET_EXAMPLE_IN,  "example_in"),
+        (None, TOILET_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("入浴場面の介護記録プロンプト", [
+        (None, BATH_PROMPT),
+        (None, BATH_EXAMPLE_IN,  "example_in"),
+        (None, BATH_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("トラブル・転倒記録プロンプト", [
+        (None, INCIDENT_PROMPT),
+        (None, INCIDENT_EXAMPLE_IN,  "example_in"),
+        (None, INCIDENT_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("ヒヤリハット報告書プロンプト", [
+        (None, NEAR_MISS_PROMPT),
+        (None, NEAR_MISS_EXAMPLE_IN,  "example_in"),
+        (None, NEAR_MISS_EXAMPLE_OUT, "example_out"),
+    ])
     pdf.add_upsell([
         "ver2（¥1,980）　苦情対応・実地指導準備の6文書",
         "セット（¥3,980）　全10本収録・最もお得",
@@ -738,12 +940,31 @@ def build_ver2():
         "みんなの介護AI"
     )
     pdf.add_intro()
-    pdf.add_prompt_page("苦情受付票プロンプト",                    [(None, COMPLAINT_RECEIPT)])
-    pdf.add_prompt_page("苦情対応経緯記録プロンプト",              [(None, COMPLAINT_PROCESS)])
-    pdf.add_prompt_page("苦情処理結果報告書プロンプト",            [(None, COMPLAINT_RESULT)])
-    pdf.add_prompt_page("実地指導 自己点検チェックリストプロンプト", [(None, INSPECTION_CHECK)])
-    pdf.add_prompt_page("実地指導 改善報告書プロンプト",           [(None, INSPECTION_REPORT)])
-    pdf.add_prompt_page("実地指導 想定問答集プロンプト",           [(None, INSPECTION_QA)])
+    pdf.add_prompt_page("苦情受付票プロンプト", [
+        (None, COMPLAINT_RECEIPT),
+        (None, COMPLAINT_RECEIPT_EXAMPLE_IN,  "example_in"),
+        (None, COMPLAINT_RECEIPT_EXAMPLE_OUT, "example_out"),
+    ])
+    pdf.add_prompt_page("苦情対応経緯記録プロンプト", [
+        (None, COMPLAINT_PROCESS),
+        (None, NOTE_INPUT_ONLY, "note"),
+    ])
+    pdf.add_prompt_page("苦情処理結果報告書プロンプト", [
+        (None, COMPLAINT_RESULT),
+        (None, NOTE_INPUT_ONLY, "note"),
+    ])
+    pdf.add_prompt_page("実地指導 自己点検チェックリストプロンプト", [
+        (None, INSPECTION_CHECK),
+        (None, NOTE_INPUT_ONLY, "note"),
+    ])
+    pdf.add_prompt_page("実地指導 改善報告書プロンプト", [
+        (None, INSPECTION_REPORT),
+        (None, NOTE_INPUT_ONLY, "note"),
+    ])
+    pdf.add_prompt_page("実地指導 想定問答集プロンプト", [
+        (None, INSPECTION_QA),
+        (None, NOTE_INPUT_ONLY, "note"),
+    ])
     pdf.add_upsell([
         "ver1（¥2,980）　介護記録4場面プロンプト",
         "セット（¥3,980）　全10本収録・最もお得",
