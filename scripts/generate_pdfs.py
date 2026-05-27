@@ -248,22 +248,54 @@ class PromptPDF(FPDF):
         self.ln(3)
 
     def example_box(self, label, text):
-        """入力例・出力例ボックス（薄黄緑背景）"""
-        LABEL_BG  = (187, 247, 208)   # 少し濃い黄緑（ラベル行）
-        TEXT_BG   = (240, 253, 244)   # 薄黄緑（本文行）
-        LABEL_FG  = (22,  101,  52)   # 濃い緑（ラベル文字）
+        """入力例・出力例ボックス（薄黄緑背景＋左縦線）"""
+        LABEL_BG  = (187, 247, 208)   # #bbf7d0
+        TEXT_BG   = (240, 253, 244)   # #f0fdf4
+        LABEL_FG  = (22,  101,  52)   # 濃い緑テキスト
+        GREEN_BAR = (134, 239, 172)   # #86efac 縦線
+
+        x0      = 10     # ボックス左端
+        bar_w   = 3      # 縦線幅
+        pad     = 2      # 縦線〜テキスト間余白
+        box_w   = 190    # ボックス全幅
+        inner_x = x0 + bar_w + pad   # テキスト開始X
+        inner_w = box_w - bar_w - pad
+        label_h = 7
+        line_h  = 5.5
+
+        y0 = self.get_y()
+
+        # ─ ラベル行背景（rect で確実描画）─
         self.set_fill_color(*LABEL_BG)
-        self.set_text_color(*LABEL_FG)
+        self.set_draw_color(*LABEL_BG)
+        self.rect(x0, y0, box_w, label_h, style="F")
+
+        # ラベルテキスト（fill=False で背景を壊さない）
         self.set_font("Gothic", "B", 9)
-        self.set_x(10)
-        self.cell(190, 7, f"  {label}", fill=True,
+        self.set_text_color(*LABEL_FG)
+        self.set_xy(inner_x, y0)
+        self.cell(inner_w, label_h, label, fill=False,
                   new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+
+        # ─ 本文行（fill=True + draw_color を背景色に統一）─
         self.set_fill_color(*TEXT_BG)
+        self.set_draw_color(*TEXT_BG)
         self.set_font("Gothic", "", 9)
         self.set_text_color(60, 60, 60)
-        self.set_x(10)
-        self.multi_cell(190, 5.5, text, fill=True,
+        self.set_x(inner_x)
+        self.multi_cell(inner_w, line_h, text, fill=True,
                         new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+
+        y1 = self.get_y()
+
+        # ─ 左縦線（ラベル行＋本文行を通して描画）─
+        self.set_draw_color(*GREEN_BAR)
+        self.set_line_width(1.5)
+        self.line(x0, y0, x0, y1)
+
+        # 後処理
+        self.set_line_width(0.2)
+        self.set_draw_color(0, 0, 0)
         self.ln(3)
         self.set_text_color(*GRAY)
 
