@@ -116,6 +116,42 @@
 
 ---
 
+## 2026-05-27
+
+### 完了タスク
+- `components/pain-points.tsx`：3項目追加（計9項目に）＋「それ→すべて、AIで解決できます。」に変更
+  - 追加項目：「職員によって記録の質にバラつきがある」「新人の記録を毎回添削するのが大変」「実地指導で記録の不備を指摘されたことがある」
+- `components/pricing.tsx`：4プラン構成に全面変更（無料 / ver1 ¥2,980 / ver2 ¥1,980 / セット ¥3,980）
+- `components/prompts.tsx`：3グループ構成に変更（無料3本 / ver1有料4本 / ver2有料6本）
+- `components/features.tsx`：3カードのタイトル・説明文を更新（「記録を標準化」「管理業務を効率化」）
+- `scripts/generate_pdfs.py`：PDF生成スクリプト新規作成（fpdf2 + BIZ-UDGothic使用）
+- `public/downloads/`：3点PDFを生成（free / ver1 / ver2）
+  - カラー：ピンク（#f472b6）×黄緑（#86efac）×白、A4縦、BIZ-UDGothicフォント
+  - 構成：表紙（ロゴ）＋はじめに＋プロンプト本文＋有料版案内
+- PDF表紙タイトル修正：ピンク背景を165mmに拡大・白32pt・中央やや上に配置（白文字が薄ピンク背景に埋もれる問題を解消）
+- `components/hero.tsx`：ファーストビューのコピー刷新
+  - バッジ：「ChatGPT・Claude対応　介護専用プロンプト集」
+  - h1：「介護の書類仕事を、AIで10分に。」
+  - サブコピー：プロンプト集の具体的説明文に変更
+
+### 結果・数値
+- ビルド：全5ページ静的生成・エラーなし（各変更後確認済み）
+- PDF：3ファイル生成（free: 348KB / ver1: 351KB / ver2: 366KB）
+- git push：`6616c78` まで反映済み
+
+### 現在の状態
+- PDFは `public/downloads/` に保存済み → Vercel デプロイ後に `/downloads/free-prompts.pdf` 等でアクセス可能
+- 全購入ボタンは `disabled`（準備中）状態
+- Vercel：GitHub push → 自動デプロイ中
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- ダウンロードボタンのリンク設定（`/downloads/free-prompts.pdf`）
+- OGP・favicon設定（SNSシェア時の見栄え）
+- お問い合わせメールアドレスを本番用に変更（現在 info@example.com）
+
+---
+
 ## 2026-05-26（追記2）
 
 ### 完了タスク
