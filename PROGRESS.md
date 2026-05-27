@@ -177,6 +177,40 @@
 
 ---
 
+## 2026-05-28
+
+### 完了タスク
+- `scripts/generate_pdfs.py` に入力例・出力例を追加（全プロンプト対象）
+  - `example_box(label, text)` メソッドを新規追加
+    - ラベル行：`rect`で `#bbf7d0` 背景を確実描画 → `cell(fill=False)` でテキスト重ね
+    - 本文行：`multi_cell(fill=True)` + `set_draw_color` を背景色と統一
+    - 左端に `#86efac` 縦線 1.5pt を `line()` で描画
+  - `add_prompt_page()` を3要素タプル `(title, text, style)` 対応に拡張
+    - style: `"prompt"`（デフォルト）/ `"example_in"` / `"example_out"` / `"note"`
+  - 入力例・出力例データ定数を追加（free: 3本 / ver1: 4本 / ver2: 苦情受付票1本 + 残5種はnote）
+- PDF3ファイルを再生成
+- 背景色が付かない問題を修正（`fill=True` 単独では不安定 → `rect` ＋ `draw_color` 統一で解消）
+
+### コミット
+- `2ae03aa` feat: add input/output examples to all prompts
+- `c27e909` fix: add background color to example boxes
+
+### 結果・数値
+- PDF: free 365KB / ver1 382KB / ver2 381KB（各ページに入力例・出力例ボックス追加）
+- 警告・エラーなしで生成完了
+
+### 現在の状態
+- 全3PDFに【入力例】【出力例】薄黄緑ボックスが追加された状態
+- GitHub push・Vercel自動デプロイ済み
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- ダウンロードボタンのリンク設定（`/downloads/free-prompts.pdf`）
+- OGP・favicon設定（SNSシェア時の見栄え）
+- お問い合わせメールアドレスを本番用に変更（現在 info@example.com）
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク
