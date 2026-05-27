@@ -24,19 +24,19 @@ export function Hero() {
         <div className="max-w-xl">
           <div className="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
             <Sparkles className="mr-2 h-4 w-4" />
-            介護の仕事を、もっとラクに、もっと笑顔に。
+            ChatGPT・Claude対応　介護専用プロンプト集
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight tracking-tight">
-            AIで業務を軽減して、
+            介護の書類仕事を、
             <br />
-            <span className="text-primary">利用者さんと向き合う時間</span>
-            <br />
-            を取り戻す。
+            <span className="text-primary">AIで10分に。</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            記録業務の時短、情報共有の効率化、ケアの質の向上に。
+            ChatGPT・Claudeで使える介護専用プロンプト集を販売しています。
             <br className="hidden sm:block" />
-            AIを味方にして、介護の現場をより良くしていきましょう。
+            記録・報告書・申し送り・ヒヤリハット──
+            <br className="hidden sm:block" />
+            メモを入れるだけで、記録文が自動で完成します。
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-8">
