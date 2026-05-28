@@ -11,7 +11,7 @@ const navItems = [
   { label: "できること", href: "#features" },
   { label: "プロンプト集", href: "#prompts" },
   { label: "料金", href: "#pricing" },
-  { label: "よくある質問", href: "#faq" },
+  { label: "よくある質問", href: "/qa" },
 ]
 
 export function Header() {

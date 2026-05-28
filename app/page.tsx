@@ -7,7 +7,6 @@ import { Features } from "@/components/features"
 import { BeforeAfter } from "@/components/before-after"
 import { Prompts } from "@/components/prompts"
 import { Pricing } from "@/components/pricing"
-import { FAQ } from "@/components/faq"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -23,7 +22,6 @@ export default function Home() {
         <BeforeAfter />
         <Prompts />
         <Pricing />
-        <FAQ />
       </main>
       <Footer />
     </div>
