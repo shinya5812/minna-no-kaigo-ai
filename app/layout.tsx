@@ -3,15 +3,40 @@ import { Noto_Sans_JP } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const notoSansJP = Noto_Sans_JP({ 
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-noto-sans-jp"
 })
 
+const SITE_URL = "https://minna-no-kaigo-ai.vercel.app"
+const TITLE = "みんなの介護AI｜介護専用プロンプト集"
+const DESCRIPTION = "ChatGPT・Claudeで使える介護専用プロンプト集を販売。介護記録・ヒヤリハット・申し送りをメモを入れるだけで自動生成。"
+
 export const metadata: Metadata = {
-  title: 'みんなの介護AI | 書類仕事を減らして、利用者さんと向き合う時間を取り戻す',
-  description: '介護現場のAI活用をやさしく解説。記録時間を最大80%短縮し、利用者さんとの時間を増やしましょう。',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: '/logo.png' }],
+    url: SITE_URL,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['/logo.png'],
+  },
 }
 
 export default function RootLayout({

@@ -137,6 +137,17 @@ class PromptPDF(FPDF):
         self.add_page()
         self.section_heading(page_title)
 
+        # タイトル直下の案内文（ピンク・9pt）
+        self.set_font("Gothic", "", 9)
+        self.set_text_color(190, 24, 93)   # #be185d
+        self.set_x(15)
+        self.multi_cell(175, 5,
+            "↓ 以下のプロンプト文をそのままChatGPT・Claudeに\n"
+            "   コピーして貼り付けてください",
+            new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        self.ln(2)
+        self.set_text_color(*GRAY)
+
         for block in content_blocks:
             if len(block) == 3:
                 block_title, block_text, style = block
@@ -263,6 +274,9 @@ class PromptPDF(FPDF):
         label_h = 7
         line_h  = 5.5
 
+        GUIDE_FG  = (21, 128, 61)    # #15803d（濃い緑）
+        guide_h   = 5
+
         y0 = self.get_y()
 
         # ─ ラベル行背景（rect で確実描画）─
@@ -276,6 +290,20 @@ class PromptPDF(FPDF):
         self.set_xy(inner_x, y0)
         self.cell(inner_w, label_h, label, fill=False,
                   new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+
+        # ─ 入力例ラベルの直下に案内文（緑・9pt）─
+        if label == "【入力例】":
+            guide_y = self.get_y()
+            self.set_fill_color(*TEXT_BG)
+            self.set_draw_color(*TEXT_BG)
+            self.rect(x0, guide_y, box_w, guide_h + 2, style="F")
+            self.set_font("Gothic", "", 9)
+            self.set_text_color(*GUIDE_FG)
+            self.set_xy(inner_x, guide_y + 1)
+            self.cell(inner_w, guide_h,
+                      "↓ 以下を参考に、実際の情報に書き換えて送信してください",
+                      fill=False, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+            self.ln(1)
 
         # ─ 本文行（fill=True + draw_color を背景色に統一）─
         self.set_fill_color(*TEXT_BG)
