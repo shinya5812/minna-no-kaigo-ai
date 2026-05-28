@@ -17,7 +17,7 @@ const plans = [
       "使い方マニュアル付き",
     ],
     buttonLabel: "無料でダウンロード",
-    buttonNote: "準備中",
+    buttonNote: "",
     highlight: false,
   },
   {
@@ -131,18 +131,32 @@ export function Pricing() {
                 </ul>
 
                 <div className="mt-auto">
-                  <Button
-                    size="sm"
-                    disabled
-                    className={`w-full ${
-                      plan.highlight
-                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    {plan.buttonLabel}
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center mt-1.5">（{plan.buttonNote}）</p>
+                  {plan.id === "free" ? (
+                    <Button
+                      asChild
+                      size="sm"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                    >
+                      <a href="/downloads/free-prompts.pdf" download>
+                        {plan.buttonLabel}
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      size="sm"
+                      disabled
+                      className={`w-full ${
+                        plan.highlight
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {plan.buttonLabel}
+                    </Button>
+                  )}
+                  {plan.buttonNote && (
+                    <p className="text-xs text-muted-foreground text-center mt-1.5">（{plan.buttonNote}）</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
