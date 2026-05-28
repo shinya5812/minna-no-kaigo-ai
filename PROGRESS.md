@@ -211,6 +211,54 @@
 
 ---
 
+## 2026-05-29
+
+### 完了タスク
+- 無料PDFダウンロードボタンにリンク設定
+  - `components/pricing.tsx`：無料プランボタンを `asChild` + `<a href="/downloads/free-prompts.pdf" download>` に変更
+  - 有料プランボタンは `disabled` のまま維持
+- OGP・favicon設定（`app/layout.tsx`）
+  - `metadataBase`・`title`・`description`・`icons`・`openGraph`・`twitter` を設定
+  - favicon: `/logo.png`（16x16・32x32・Apple Touch 180x180）
+  - Twitter Card: `summary_large_image`
+- PDF案内文追加（`scripts/generate_pdfs.py`）
+  - プロンプトタイトル直下：ピンク（#be185d・9pt）「↓ コピーして貼り付けてください」
+  - 入力例ラベル直下：緑（#15803d・9pt）「↓ 書き換えて送信してください」
+  - 3件PDF再生成完了
+- サイトコンテンツ・UX全体改善（8作業）
+  - `components/before-after.tsx`（新規）：Before/Afterカード3枚（介護記録・申し送り・ヒヤリハット）を Features 直下に追加
+  - `components/site-intro.tsx`（新規）：「このサイトでできること」5項目をヒーロー直下に追加
+  - `components/hero.tsx`：「✓ 無料プロンプト集あり ✓ 登録不要 ✓ 初心者歓迎」追加・CTAボタンコピー変更（「まずはAIを知る」「無料プロンプトを見る」）
+  - `components/prompts.tsx`：ボタン上に「介護記録」「申し送り」等5タグ追加
+  - `components/footer.tsx`：フッターに「AIの注意点（Q&A）」リンク追加・メールアドレスを本番用に変更
+  - `app/qa/page.tsx`：注意点セクション追加（個人情報・生成文の責任・ChatGPT vs Claude）
+  - `app/kensetsu/page.tsx`・`app/seizou/page.tsx`（新規）：準備中ページ作成
+- Q&Aページ統合
+  - `components/faq.tsx` の5項目（パソコン苦手・ChatGPTアカウント・カスタマイズ・購入受取・返金）を `app/qa/page.tsx` 先頭に移植
+  - トップページから `<FAQ />` セクションを削除
+  - `components/header.tsx`：「よくある質問」リンクを `#faq` → `/qa` に変更
+
+### コミット（本日）
+- `35be52f` feat: enable free PDF download button
+- `2429089` feat: add OGP/favicon and PDF usage guide text
+- `17ad646` feat: improve site content and UX
+- `6a07c74` fix: add QA safety section and fix before-after card
+- `7555fa0` fix: merge QA pages and fix before-after card
+
+### 現在の状態
+- トップページ構成：Hero → SiteIntro → PainPoints → Benefits → Features → BeforeAfter → Prompts → Pricing
+- Q&Aページ（/qa）：11問 + 注意点3問に統合済み
+- PDF3件：案内文付きで再生成済み（public/downloads/）
+- 全ページ静的ビルド・エラーなし・GitHub push 済み
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- お問い合わせフォームまたはメール送信実装
+- Vercel 本番確認（https://minna-no-kaigo-ai.vercel.app）
+- 特定商取引法・プライバシーポリシーページの作成
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク
