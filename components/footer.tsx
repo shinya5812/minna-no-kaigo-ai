@@ -8,6 +8,7 @@ const footerLinks = [
   { label: "プロンプト集", href: "#prompts" },
   { label: "料金", href: "#pricing" },
   { label: "よくある質問", href: "#faq" },
+  { label: "AIの注意点（Q&A）", href: "/qa#caution" },
 ]
 
 const legalLinks = [
@@ -55,12 +56,12 @@ export function Footer() {
           <div>
             <h3 className="font-bold mb-4" style={{ color: "#4a4a4a" }}>お問い合わせ</h3>
             <a
-              href="mailto:info@example.com"
+              href="mailto:shinya.wa5812@gmail.com"
               className="flex items-center gap-2 text-sm transition-colors hover:text-primary"
               style={{ color: "#7a7a7a" }}
             >
               <Mail className="h-4 w-4" />
-              info@example.com
+              shinya.wa5812@gmail.com
             </a>
             <div className="mt-6">
               <h3 className="font-bold mb-2" style={{ color: "#4a4a4a" }}>法的情報</h3>

@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "よくある質問 | 介護AIナビ",
-  description: "介護AIナビのプロンプト集に関するよくある質問をまとめています。",
+  title: "よくある質問 | みんなの介護AI",
+  description: "みんなの介護AIのプロンプト集に関するよくある質問と、AIを使う際の注意点をまとめています。",
 };
 
 const faqs = [
@@ -38,6 +38,21 @@ const faqs = [
   },
 ];
 
+const cautionFaqs = [
+  {
+    q: "利用者の個人情報をAIに入力しても大丈夫ですか？",
+    a: "個人名・住所・施設名などの個人情報は入力しないことを推奨します。「田中様」→「利用者様」のように置き換えてからAIに送信してください。このサイトのプロンプトは個人情報なしでも十分な記録文が生成できるよう設計されています。",
+  },
+  {
+    q: "AIが生成した文章をそのまま記録に使っていいですか？",
+    a: "必ず内容を確認・修正してから使用してください。AIは事実と異なる内容を生成することがあります。最終的な記録の責任は職員にあります。",
+  },
+  {
+    q: "ChatGPTとClaudeはどちらがおすすめですか？",
+    a: "どちらも無料で使い始められます。ChatGPTはアカウント登録後すぐに使えます。Claudeは日本語の自然さに優れています。まずはどちらか一方から試してみてください。",
+  },
+];
+
 export default function QAPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-14">
@@ -57,16 +72,33 @@ export default function QAPage() {
             className="border border-gray-200 rounded-xl p-6 bg-white shadow-sm"
           >
             <p className="font-bold text-lg mb-3 flex items-start gap-2">
-              <span style={{ color: "#2d7a4f" }} className="shrink-0">
-                Q.
-              </span>
+              <span style={{ color: "#2d7a4f" }} className="shrink-0">Q.</span>
               <span style={{ color: "#1e3a5f" }}>{faq.q}</span>
             </p>
-            <p className="text-gray-700 text-base leading-relaxed pl-6">
-              {faq.a}
-            </p>
+            <p className="text-gray-700 text-base leading-relaxed pl-6">{faq.a}</p>
           </div>
         ))}
+      </div>
+
+      {/* AIを使う際の注意点 */}
+      <div id="caution" className="mt-16">
+        <h2 style={{ color: "#1e3a5f" }} className="text-2xl font-bold mb-6">
+          AIを使う際の注意点
+        </h2>
+        <div className="space-y-6">
+          {cautionFaqs.map((faq, index) => (
+            <div
+              key={index}
+              className="border border-amber-200 rounded-xl p-6 bg-amber-50 shadow-sm"
+            >
+              <p className="font-bold text-lg mb-3 flex items-start gap-2">
+                <span style={{ color: "#d97706" }} className="shrink-0">Q.</span>
+                <span style={{ color: "#1e3a5f" }}>{faq.q}</span>
+              </p>
+              <p className="text-gray-700 text-base leading-relaxed pl-6">{faq.a}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div

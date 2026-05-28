@@ -90,12 +90,25 @@ export function Prompts() {
               ))}
             </div>
 
-            <Button
-              size="lg"
-              className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              プロンプト集を手に入れる
-            </Button>
+            <div className="mt-8">
+              <div className="flex flex-wrap gap-2 mb-4">
+                {["介護記録", "申し送り", "ヒヤリハット", "服薬", "苦情対応"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-medium px-3 py-1 rounded-full"
+                    style={{ backgroundColor: "#fce7f3", color: "#be185d" }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                プロンプト集を手に入れる
+              </Button>
+            </div>
           </div>
 
           <div className="relative">

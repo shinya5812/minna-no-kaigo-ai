@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Sparkles, ArrowRight } from "lucide-react"
+import { Sparkles, ArrowRight } from "lucide-react"
 
 export function Hero() {
   return (
@@ -38,14 +38,17 @@ export function Hero() {
             <br className="hidden sm:block" />
             メモを入れるだけで、記録文が自動で完成します。
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-8">
-              <BookOpen className="mr-2 h-5 w-5" />
-              初めての方へ
+          {/* 訴求テキスト */}
+          <p className="mt-5 text-sm font-medium" style={{ color: "#15803d" }}>
+            ✓ 無料プロンプト集あり　✓ 登録不要　✓ 初心者歓迎
+          </p>
+          <div className="mt-4 flex flex-col sm:flex-row gap-3">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-8 min-h-[44px]">
+              まずはAIを知る
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="text-base px-8 border-2">
-              プロンプト集を見る
+            <Button size="lg" variant="outline" className="text-base px-8 border-2 min-h-[44px]">
+              無料プロンプトを見る
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
