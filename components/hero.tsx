@@ -55,16 +55,56 @@ export function Hero() {
         </div>
       </div>
     </section>
-    <div style={{lineHeight:0, fontSize:0, display:'block'}}>
-      <Image
-        src="/prompt-explain.png"
-        alt="プロンプトとは？AIへのお願い文のことです"
-        width={1456}
-        height={816}
-        className="w-full h-auto"
-        style={{display:'block'}}
-      />
-    </div>
+    <section className="py-14 bg-white border-b border-pink-100">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-10" style={{ color: "#1e3a5f" }}>
+          プロンプトとは？
+        </h2>
+        <div className="flex flex-col md:flex-row gap-10 items-center">
+          {/* 左側：女性イラスト */}
+          <div className="md:w-2/5 flex justify-center">
+            <Image
+              src="/hero-image.png"
+              alt="介護士イラスト"
+              width={400}
+              height={500}
+              className="w-full max-w-xs h-auto rounded-2xl"
+            />
+          </div>
+
+          {/* 右側：入力例→AI回答例 */}
+          <div className="md:w-3/5 flex flex-col gap-4">
+            {/* プロンプト入力例ボックス */}
+            <div className="rounded-xl p-5" style={{ backgroundColor: "#e8f5ee" }}>
+              <p className="text-sm font-bold mb-3" style={{ color: "#2d7a4f" }}>
+                プロンプト入力例 ✏️
+              </p>
+              <p className="text-base text-gray-700 leading-relaxed whitespace-pre-line">
+                {`田中さんの入浴介助の記録を作って。\n\n・今日は機嫌よかった\n・転倒なし\n・食事もしっかり食べた`}
+              </p>
+            </div>
+
+            {/* 矢印 */}
+            <div className="text-center text-3xl text-gray-400 leading-none">↓</div>
+
+            {/* AI回答例ボックス */}
+            <div className="rounded-xl p-5" style={{ backgroundColor: "#fce7f3" }}>
+              <p className="text-sm font-bold mb-3" style={{ color: "#be185d" }}>
+                AIの回答例
+              </p>
+              <p className="text-base text-gray-700 leading-relaxed whitespace-pre-line">
+                {`【介護記録】\n田中様に対し入浴介助を実施した。\n本日は機嫌良く過ごされていた。\n介助中に転倒等の事故は見られなかった。\n食事摂取状況も良好で、しっかり召し上がられていた。`}
+              </p>
+            </div>
+
+            {/* POINT注記 */}
+            <p className="text-sm font-semibold" style={{ color: "#be185d" }}>
+              POINT：入力した情報だけを使って文章を整えます。AIが勝手に事実を作ることはありません。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     </>
   )
 }
