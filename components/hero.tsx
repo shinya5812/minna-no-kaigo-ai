@@ -64,8 +64,8 @@ export function Hero() {
           {/* 左側：女性イラスト */}
           <div className="md:w-2/5 flex justify-center">
             <Image
-              src="/hero-image.png"
-              alt="介護士イラスト"
+              src="/images/prompt-staff.png"
+              alt="ノートパソコンで作業する介護スタッフ"
               width={400}
               height={500}
               className="w-full max-w-xs h-auto rounded-2xl"
