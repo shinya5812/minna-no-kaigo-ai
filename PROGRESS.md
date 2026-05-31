@@ -259,6 +259,41 @@
 
 ---
 
+## 2026-05-31
+
+### 完了タスク
+- `components/before-after.tsx`：Before/Afterカード3枚のテキストを全面更新
+  - カード1（介護記録）：Before「今日は元気。朝食ほぼ完食。入浴も嫌がらずできた。」に変更
+  - カード2（申し送り）：Beforeを「14時頃に右膝が痛いって言ってた…」により具体的な内容に
+  - カード3（ヒヤリハット）：Beforeを「田中さんが廊下で転びそうになった…」に詳細化
+  - 各カードのAfterもより自然な文体に更新（ラベルは変更なし）
+- `components/hero.tsx`：「プロンプトとは？」セクションを画像1枚→コンポーネントに作り直し
+  - `prompt-explain.png` 画像から、左右2カラムのインタラクティブレイアウトに変更
+  - 左：介護スタッフイラスト（後に差し替え）
+  - 右：薄緑「プロンプト入力例 ✏️」ボックス → 矢印↓ → 薄ピンク「AIの回答例」ボックス
+  - POINT注記（濃いピンク）を下部に追加
+- `public/images/prompt-staff.png`：新規追加
+  - コピー元：`web_data/ChatGPT Image 2026年5月30日 10_38_34.png`
+  - `public/images/` フォルダを新規作成してコピー・リネーム
+  - `hero.tsx` の画像参照を `/hero-image.png` → `/images/prompt-staff.png` に変更
+  - alt属性「ノートパソコンで作業する介護スタッフ」に設定
+
+### コミット（本日）
+- `3fa2117` fix: update before-after cards and prompt explanation section
+- `cc8ee25` fix: replace prompt explanation section image
+
+### 現在の状態
+- トップページ構成：Hero（ヒーロー + プロンプトとは？セクション）→ SiteIntro → PainPoints → Benefits → Features → BeforeAfter → Prompts → Pricing
+- 「プロンプトとは？」：左にイラスト（prompt-staff.png）、右に入力例→AI回答例のボックス構成
+- GitHub push・Vercel自動デプロイ済み
+
+### 次のアクション
+- Stripe決済の組み込み（購入ボタンに決済リンクを追加）
+- 特定商取引法・プライバシーポリシーページの作成
+- お問い合わせフォームまたはメール送信実装
+
+---
+
 ## 2026-05-25（セッション終了）
 
 ### 完了タスク
