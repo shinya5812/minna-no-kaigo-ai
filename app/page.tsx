@@ -1,12 +1,11 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
-import { SiteIntro } from "@/components/site-intro"
 import { PainPoints } from "@/components/pain-points"
-import { Benefits } from "@/components/benefits"
-import { Features } from "@/components/features"
+import { AiAnxiety } from "@/components/ai-anxiety"
 import { BeforeAfter } from "@/components/before-after"
-import { Prompts } from "@/components/prompts"
+import { ThreeSteps } from "@/components/three-steps"
 import { Pricing } from "@/components/pricing"
+import { FAQ } from "@/components/faq"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -15,13 +14,12 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <SiteIntro />
         <PainPoints />
-        <Benefits />
-        <Features />
+        <AiAnxiety />
         <BeforeAfter />
-        <Prompts />
+        <ThreeSteps />
         <Pricing />
+        <FAQ />
       </main>
       <Footer />
     </div>

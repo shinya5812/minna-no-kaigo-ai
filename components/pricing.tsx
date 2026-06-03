@@ -6,79 +6,61 @@ const plans = [
   {
     id: "free",
     label: null,
-    title: "無料プラン",
+    title: "無料版",
     price: "0",
     unit: "円",
     description: "まず試してみたい方に",
     features: [
-      "食事場面の介護記録プロンプト",
-      "申し送り文の作成プロンプト",
-      "服薬場面の記録プロンプト",
-      "使い方マニュアル付き",
+      "記録系テンプレート（基本3種）",
+      "穴埋め入力ガイド",
+      "AI入門ガイド",
     ],
     buttonLabel: "無料でダウンロード",
     buttonNote: "",
     highlight: false,
+    comingSoon: false,
   },
   {
-    id: "ver1",
-    label: "介護記録",
-    title: "介護記録プロンプト集 ver1",
-    price: "2,980",
+    id: "record",
+    label: "記録パック",
+    title: "記録パック",
+    price: "1,280",
     unit: "円（買い切り）",
-    description: "日常の介護記録をカバー",
+    description: "毎日の記録・申し送りをまとめてカバー",
     features: [
-      "排泄場面の介護記録",
-      "入浴場面の介護記録",
-      "トラブル・転倒記録",
-      "ヒヤリハット報告書",
+      "1つのメモから「記録・申し送り・家族報告」を同時作成",
+      "汎用テンプレート＋場面特化の計5本",
       "使い方マニュアル付き",
     ],
     buttonLabel: "購入する",
     buttonNote: "準備中",
     highlight: false,
+    comingSoon: true,
   },
   {
-    id: "ver2",
-    label: "業務書類",
-    title: "業務書類プロンプト集 ver2",
-    price: "1,980",
-    unit: "円（買い切り）",
-    description: "管理・実地指導対応をカバー",
-    features: [
-      "苦情受付票",
-      "苦情対応経緯記録",
-      "苦情処理結果報告書",
-      "実地指導 自己点検チェックリスト",
-      "実地指導 改善報告書",
-      "実地指導 想定問答集",
-    ],
-    buttonLabel: "購入する",
-    buttonNote: "準備中",
-    highlight: false,
-  },
-  {
-    id: "set",
-    label: "一番お得",
-    title: "ver1＋ver2 セット",
+    id: "compliance",
+    label: "コンプライアンス",
+    title: "コンプライアンス・監査パック",
     price: "3,980",
     unit: "円（買い切り）",
-    description: "10本すべて収録・送料なし",
+    description: "苦情対応・実地指導対策をカバー",
     features: [
-      "上記10本すべて収録",
+      "苦情受付票・経緯記録・処理報告書（計3本）",
+      "実地指導 自己点検・改善報告・想定問答（計3本）",
+      "ヒヤリハット報告書（1本）",
       "使い方マニュアル付き",
-      "送料・追加料金なし",
     ],
-    buttonLabel: "セットで購入する",
+    buttonLabel: "購入する",
     buttonNote: "準備中",
     highlight: true,
+    comingSoon: true,
   },
 ]
 
 export function Pricing() {
   return (
     <section id="pricing" className="py-20 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
             シンプルな<span className="text-primary">料金プラン</span>
@@ -88,7 +70,7 @@ export function Pricing() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-3 gap-6">
           {plans.map((plan) => (
             <Card
               key={plan.id}
@@ -131,7 +113,15 @@ export function Pricing() {
                 </ul>
 
                 <div className="mt-auto">
-                  {plan.id === "free" ? (
+                  {plan.comingSoon ? (
+                    <Button
+                      size="sm"
+                      disabled
+                      className="w-full bg-muted text-muted-foreground cursor-not-allowed"
+                    >
+                      {plan.buttonLabel}
+                    </Button>
+                  ) : (
                     <Button
                       asChild
                       size="sm"
@@ -140,18 +130,6 @@ export function Pricing() {
                       <a href="/downloads/free-prompts.pdf" download>
                         {plan.buttonLabel}
                       </a>
-                    </Button>
-                  ) : (
-                    <Button
-                      size="sm"
-                      disabled
-                      className={`w-full ${
-                        plan.highlight
-                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      {plan.buttonLabel}
                     </Button>
                   )}
                   {plan.buttonNote && (

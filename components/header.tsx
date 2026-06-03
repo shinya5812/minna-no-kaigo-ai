@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button"
 
 const navItems = [
   { label: "ホーム", href: "#" },
-  { label: "できること", href: "#features" },
-  { label: "プロンプト集", href: "#prompts" },
+  { label: "できること", href: "#before-after" },
+  { label: "使い方", href: "#steps" },
   { label: "料金", href: "#pricing" },
   { label: "よくある質問", href: "/qa" },
 ]
